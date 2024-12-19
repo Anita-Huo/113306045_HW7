@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="113306045_HW7.css">
+</head>
+<body>
+	<div class="main-container"> 
+		<div class="left-panel">
+			<div class="centered">
+				<img src="myphoto.jpg" width = "190" height = "250" alt="my photo"> 
+				<h2 id="nameField">霍宣彤</h2>
+				<button id="editBtn">edit</button>
+			</div>
+			<p><strong>About Me</strong></p>
+			<p>I am a freshman in the Department of Management Information Systems at National Chengchi University. I have experience in writing Java, HTML, and CSS.</p>
+			<p><strong>CONTACT</strong></p>
+			<p><a href="mailto: 113306045@nccu.edu.tw">113306045@nccu.edu.tw</a></p>
+				<br><img src="校徽.jpg" width="120" height="120" alt = "NCCU icon"></br> 
+		</div>
+		<div class="right-panel">
+			<div class="education">
+				<h3>Education</h3>
+				<ul>
+					<li><strong>2024 - now</strong>: National Chengchi University, Department of MIS</li>
+					<li><strong>2013 - 2024</strong>: Taipei Private Tsai Hsing Senior High School</li>
+				</ul>
+			</div>
+			<div class="homework">
+				<h3>Homework List</h3>
+				<ul>
+					<li>LAB 1 - <a href="https://github.com/Anita-Huo/113306045_LAB1.git">https://github.com/Anita-Huo/113306045_LAB1.git</a></li>
+					<li>HW2 - <a href="https://github.com/Anita-Huo/HW-2.git">https://github.com/Anita-Huo/HW-2.git</a></li>
+					<li>HW4 - <a href="https://github.com/Anita-Huo/113306045_HW4.git">https://github.com/Anita-Huo/113306045_HW4.git</a></li>
+				</ul>
+			</div>
+			<div class="favorite-music">
+				<h3>Favorite Music</h3>
+				<div class="music-list">
+					<div class="music-item">
+						<a href="https://youtu.be/yrAwLIcgPlY?si=MgmaFIzHlL43x6Y0">
+							<img src="YTicon.png" width = "50" height="50" alt = "links">
+						</a>
+						<p>拋物線</p>
+					</div>
+					<div class="music-item">
+						<a href="https://youtu.be/kQOgXPuluEY?si=zg6jWVnt52051VwP">
+							<img src="YTicon.png" width="50" height="50" alt = "links">
+						</a>
+						<p>如果的事</p>
+					</div>
+					<div class="music-item">
+						<a href="https://youtu.be/QoVAm801sDM?si=Pw-thuy25pKejahn">
+							<img src="YTicon.png" width="50" height="50" alt = "links">
+						</a>
+						<p>夏夢</p>
+					</div>
+				</div>
+				<button id="addMusicBtn">add</button>
+			</div>
+			<div id="musicForm" style="display: none;">
+				<label>link:</label>
+				<input type="text" id="musicLink" placeholder="Music Link">
+				<label>name:</label>
+				<input type="text" id="musicName" placeholder="Music Name">
+				<button id="submitmusic" type="button">Submit</button>
+			</div>
+	</div>
+
+	<script>
+    let isEditing = false;
+
+    const editButton = document.getElementById("editBtn");
+    const nameField = document.getElementById("nameField");
+
+    editButton.addEventListener("click", () => {
+      if (isEditing) {
+        const inputField = document.getElementById("nameInput");
+        nameField.textContent = inputField.value;
+        editButton.textContent = "edit";
+      } else {
+        const currentName = nameField.textContent;
+        nameField.innerHTML = `<input type="text" id="nameInput" value="${currentName}">`;
+        editButton.textContent = "save";
+      }
+      isEditing = !isEditing;
+    });
+
+    const addMusicBtn = document.getElementById("addMusicBtn");
+	const musicForm = document.getElementById("musicForm");
+	const submitMusic = document.getElementById("submitMusic");
+	const musicLinkInput = document.getElementById("musicLink");
+	const musicNameInput = document.getElementById("musicName");
+	const musicList = document.getElementById("musicList");
+
+	addMusicBtn.addEventListener("click", () => {
+	  musicForm.style.display = "block";
+	});
+
+	submitMusic.addEventListener("click", () => {
+	  const link = musicLinkInput.value.trim();
+	  const name = musicNameInput.value.trim();
+
+	  if (link && name) {
+	    const musicItem = document.createElement("div");
+	    musicItem.classList.add("music-item");
+
+	    const img = document.createElement("img");
+	    img.src = "default-music-icon.png";
+	    img.alt = "music image";
+
+	    const linkElement = document.createElement("a");
+	    linkElement.href = link;
+	    linkElement.target = "_blank";
+	    linkElement.textContent = name;
+
+	    musicItem.appendChild(img);
+	    musicItem.appendChild(linkElement);
+	    musicList.appendChild(musicItem);
+
+	    musicLinkInput.value = "";
+	    musicNameInput.value = "";
+	    musicForm.style.display = "none";
+	  } else {
+	    alert("請輸入完整的音樂連結和名稱！");
+	  }
+	});
+
+  </script>
+
+
+</body>
+</html>
